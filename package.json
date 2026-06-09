@@ -1,0 +1,29 @@
+{
+  "name": "api-pos",
+  "version": "1.0.0",
+  "description": "pos for mini restaurant",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/server"
+  },
+  "dependencies": {
+    "@prisma/adapter-mariadb": "^7.8.0",
+    "body-parser": "^2.2.2",
+    "cors": "^2.8.6",
+    "crypto-hash": "^4.0.1",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mariadb": "^3.5.2",
+    "mysql": "^2.18.1",
+    "nodemon": "^3.1.14"
+  },
+  "devDependencies": {
+    "@prisma/client": "^6.19.3",
+    "prisma": "^6.19.3"
+  }
+}
