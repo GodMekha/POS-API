@@ -1,9 +1,10 @@
-import { ValidateData } from "../service/validate.js";
-import { resError, resSuccess } from "../service/response.js";
-import { EMessage, SMessage } from "../service/message.js";
-import prisma from "../config/prisma.js"
-import { Decrypt, HashEncrypt } from "../lib/hash.js";
-import { GenerateToken } from "../lib/generatToken.js";
+import { ValidateData } from "../../service/validate.js";
+import { resError, resSuccess } from "../../service/response.js";
+import { EMessage, SMessage } from "../../service/message.js";
+import prisma from "../../config/prisma.js"
+import { Decrypt, HashEncrypt } from "../../lib/hash.js";
+import { GenerateToken } from "../../lib/generatToken.js";
+
 
 export default class AuthController {
     static async getAll(req, res) {
@@ -39,10 +40,10 @@ export default class AuthController {
                 take: parseInt(limit),
             });
             if (!user) return resError(res, 404, EMessage.NotFound);
-          
+
             const count = await prisma.user.count({ where: query });
             const totalPage = Math.ceil(count / parseInt(limit));
-           const safeUsers = user.map(({ password, ...rest }) => rest);
+            const safeUsers = user.map(({ password, ...rest }) => rest);
             return resSuccess(res, SMessage.getAll, { data: safeUsers, totalPage })
         } catch (error) {
             console.error("Get all Controller Error:", error);
@@ -153,6 +154,28 @@ export default class AuthController {
             return SendError(res, 500, EMessage.ErrorServer, error.message)
         }
     }
+    static async UpdateUser(req, res) {
+        try {
+            const user_id = req.params.user_id;
+            const { username } = req.body;
+            if (!username) {
+                return resError(res, 400, EMessage.BadRequest, "username");
+            }
+            const user = await prisma.user.findFirst({ where: { user_id } });
+            if (!user) {
+                return resError(res, 404, EMessage.NotFound);
+            }
+            const update = await prisma.user.update({
+                where: { user_id }, data: {
+                    username
+                }
+            });
+            return resSuccess(res, SMessage.updated,update);
+        } catch (error) {
+            console.error("Update user Controller Error:", error);
+            return SendError(res, 500, EMessage.ErrorServer, error.message)
+        }
+    }
     static async ChangePassword(req, res) {
         try {
             const user_id = req.user; // ມາຈາກ token 
@@ -188,7 +211,7 @@ export default class AuthController {
             const user_id = req.user; // ມາຈາກ token 
             const data = await prisma.user.delete({ where: { user_id: user_id } })
             if (!data) return resError(res, 404, EMessage.EDelete);
-            return resSuccess(res, SMessage.Delete,data);
+            return resSuccess(res, SMessage.Delete, data);
         } catch (error) {
             console.error("Delete Controller Error:", error);
             return SendError(res, 500, EMessage.ErrorServer, error.message)

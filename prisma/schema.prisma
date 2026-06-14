@@ -10,11 +10,10 @@ generator client {
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
-  
 }
 
 model User {
-  user_id          String    @id @default(uuid()) @db.VarChar(36)
+  user_id     String   @id @default(uuid()) @db.VarChar(36)
   username    String
   password    String
   phoneNumber Int
@@ -27,7 +26,7 @@ model User {
 }
 
 model Order {
-  order_id   String        @id @db.VarChar(34)
+  order_id   String        @id @default(uuid()) @db.VarChar(34)
   userId     String        @db.VarChar(34)
   users      User          @relation(fields: [userId], references: [user_id])
   totalPrice Int
@@ -39,7 +38,7 @@ model Order {
 }
 
 model OrderDetail {
-  ordrd_id        String   @id @db.VarChar(34)
+  ordrd_id  String   @id @default(uuid()) @db.VarChar(34)
   orderId   String   @db.VarChar(34)
   order     Order    @relation(fields: [orderId], references: [order_id])
   productId String
@@ -51,7 +50,7 @@ model OrderDetail {
 }
 
 model Category {
-  category_id String    @id @db.VarChar(34)
+  category_id String    @id @default(uuid()) @db.VarChar(34)
   name        String
   icon        String?
   active      Boolean   @default(true)
@@ -61,9 +60,10 @@ model Category {
 }
 
 model Product {
-  product_id        String             @id @db.VarChar(34)
+  product_id        String             @id @default(uuid()) @db.VarChar(34)
   categoryId        String             @db.VarChar(34)
   category          Category           @relation(fields: [categoryId], references: [category_id])
+  image             String
   productName       String
   productDetail     String?
   productQty        Int
@@ -76,7 +76,7 @@ model Product {
 }
 
 model HistoryInProduct {
-  hip_id        String   @id @db.VarChar(34)
+  hip_id        String   @id @default(uuid()) @db.VarChar(34)
   productId     String   @db.VarChar(34)
   products      Product  @relation(fields: [productId], references: [product_id])
   productName   String
@@ -88,7 +88,7 @@ model HistoryInProduct {
 }
 
 model Inventory {
-  inventory_id String               @id @db.VarChar(34)
+  inventory_id String               @id @default(uuid()) @db.VarChar(34)
   list         String
   unit         String
   amount       Int
@@ -101,7 +101,7 @@ model Inventory {
 }
 
 model HistoryInInventory {
-  id          String    @id @db.VarChar(34)
+  id          String    @id @default(uuid()) @db.VarChar(34)
   inventoryId String    @db.VarChar(34)
   inventory   Inventory @relation(fields: [inventoryId], references: [inventory_id])
   list        String
@@ -115,7 +115,7 @@ model HistoryInInventory {
 }
 
 model Supply {
-  supply_id String     @id @db.VarChar(34)
+  supply_id String     @id @default(uuid()) @db.VarChar(34)
   company   String
   phone     Int
   sellName  String
@@ -127,7 +127,7 @@ model Supply {
 }
 
 model Purchase {
-  purchase_id  String           @id @db.VarChar(34)
+  purchase_id  String           @id @default(uuid()) @db.VarChar(34)
   supplyId     String           @db.VarChar(34)
   supply       Supply           @relation(fields: [supplyId], references: [supply_id])
   currency     String
@@ -141,7 +141,7 @@ model Purchase {
 }
 
 model PurchaseDetail {
-  pd_id      String   @id @db.VarChar(34)
+  pd_id      String   @id @default(uuid()) @db.VarChar(34)
   purchaseId String   @db.VarChar(34)
   purchase   Purchase @relation(fields: [purchaseId], references: [purchase_id])
   list       String
@@ -155,7 +155,7 @@ model PurchaseDetail {
 }
 
 model Package {
-  id        String   @id @db.VarChar(34)
+  id        String   @id @default(uuid()) @db.VarChar(34)
   name      String
   timeline  String
   price     Int
@@ -166,7 +166,7 @@ model Package {
 }
 
 model Customer {
-  id        String   @id @db.VarChar(34)
+  id        String   @id @default(uuid()) @db.VarChar(34)
   fullname  String
   phone     Int
   address   String
@@ -177,7 +177,7 @@ model Customer {
 }
 
 model Sell {
-  id          String       @id @db.VarChar(34)
+  id          String       @id @default(uuid()) @db.VarChar(34)
   customerId  String       @db.VarChar(34)
   customer    Customer     @relation(fields: [customerId], references: [id])
   packageId   String       @db.VarChar(34)
@@ -191,7 +191,7 @@ model Sell {
 }
 
 model SellDetail {
-  id        String   @id @db.VarChar(34)
+  id        String   @id @default(uuid()) @db.VarChar(34)
   sellId    String   @db.VarChar(34)
   sell      Sell     @relation(fields: [sellId], references: [id])
   partId    String   @db.VarChar(34)
@@ -203,7 +203,7 @@ model SellDetail {
 }
 
 model Part {
-  id          String       @id @db.VarChar(34)
+  id          String       @id @default(uuid()) @db.VarChar(34)
   list        String
   amount      Int
   price       Int
