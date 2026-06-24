@@ -9,6 +9,7 @@ export const auth = async (req, res, next) => {
         if (!authorization) {
             return SendError(res, 401, EMessage.Uauthorization)
         }
+       
         const token = authorization.replace("Bearer ", "");
         if (!token) return resError(res, 401, EMessage.Uaunthorization)
         const verify = await VerifyToken(token); // ສ້າງໃນ service
