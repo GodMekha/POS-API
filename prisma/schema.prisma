@@ -26,8 +26,8 @@ model User {
 }
 
 model Order {
-  order_id   String        @id @default(uuid()) @db.VarChar(34)
-  userId     String        @db.VarChar(34)
+  order_id   String        @id @default(uuid()) @db.VarChar(36)
+  userId     String        @db.VarChar(36)
   users      User          @relation(fields: [userId], references: [user_id])
   totalPrice Int
   currency   String
@@ -38,8 +38,8 @@ model Order {
 }
 
 model OrderDetail {
-  ordrd_id  String   @id @default(uuid()) @db.VarChar(34)
-  orderId   String   @db.VarChar(34)
+  ordrd_id  String   @id @default(uuid()) @db.VarChar(36)
+  orderId   String   @db.VarChar(36)
   order     Order    @relation(fields: [orderId], references: [order_id])
   productId String
   amount    Int
@@ -50,7 +50,7 @@ model OrderDetail {
 }
 
 model Category {
-  category_id String    @id @default(uuid()) @db.VarChar(34)
+  category_id String    @id @default(uuid()) @db.VarChar(36)
   name        String
   icon        String?
   active      Boolean   @default(true)
@@ -60,8 +60,8 @@ model Category {
 }
 
 model Product {
-  product_id        String             @id @default(uuid()) @db.VarChar(34)
-  categoryId        String             @db.VarChar(34)
+  product_id        String             @id @default(uuid()) @db.VarChar(36)
+  categoryId        String             @db.VarChar(36)
   category          Category           @relation(fields: [categoryId], references: [category_id])
   image             String
   productName       String
@@ -76,8 +76,8 @@ model Product {
 }
 
 model HistoryInProduct {
-  hip_id        String   @id @default(uuid()) @db.VarChar(34)
-  productId     String   @db.VarChar(34)
+  hip_id        String   @id @default(uuid()) @db.VarChar(36)
+  productId     String   @db.VarChar(36)
   products      Product  @relation(fields: [productId], references: [product_id])
   productName   String
   productDetail String?
@@ -88,7 +88,7 @@ model HistoryInProduct {
 }
 
 model Inventory {
-  inventory_id String               @id @default(uuid()) @db.VarChar(34)
+  inventory_id String               @id @default(uuid()) @db.VarChar(36)
   list         String
   unit         String
   amount       Int
@@ -101,8 +101,8 @@ model Inventory {
 }
 
 model HistoryInInventory {
-  id          String    @id @default(uuid()) @db.VarChar(34)
-  inventoryId String    @db.VarChar(34)
+  id          String    @id @default(uuid()) @db.VarChar(36)
+  inventoryId String    @db.VarChar(36)
   inventory   Inventory @relation(fields: [inventoryId], references: [inventory_id])
   list        String
   unit        String
@@ -115,7 +115,7 @@ model HistoryInInventory {
 }
 
 model Supply {
-  supply_id String     @id @default(uuid()) @db.VarChar(34)
+  supply_id String     @id @default(uuid()) @db.VarChar(36)
   company   String
   phone     Int
   sellName  String
@@ -127,8 +127,8 @@ model Supply {
 }
 
 model Purchase {
-  purchase_id  String           @id @default(uuid()) @db.VarChar(34)
-  supplyId     String           @db.VarChar(34)
+  purchase_id  String           @id @default(uuid()) @db.VarChar(36)
+  supplyId     String           @db.VarChar(36)
   supply       Supply           @relation(fields: [supplyId], references: [supply_id])
   currency     String
   expressName  String?
@@ -141,8 +141,8 @@ model Purchase {
 }
 
 model PurchaseDetail {
-  pd_id      String   @id @default(uuid()) @db.VarChar(34)
-  purchaseId String   @db.VarChar(34)
+  pd_id      String   @id @default(uuid()) @db.VarChar(36)
+  purchaseId String   @db.VarChar(36)
   purchase   Purchase @relation(fields: [purchaseId], references: [purchase_id])
   list       String
   unit       String
@@ -155,7 +155,7 @@ model PurchaseDetail {
 }
 
 model Package {
-  id        String   @id @default(uuid()) @db.VarChar(34)
+  id        String   @id @default(uuid()) @db.VarChar(36)
   name      String
   timeline  String
   price     Int
@@ -166,7 +166,7 @@ model Package {
 }
 
 model Customer {
-  id        String   @id @default(uuid()) @db.VarChar(34)
+  id        String   @id @default(uuid()) @db.VarChar(36)
   fullname  String
   phone     Int
   address   String
@@ -177,10 +177,10 @@ model Customer {
 }
 
 model Sell {
-  id          String       @id @default(uuid()) @db.VarChar(34)
-  customerId  String       @db.VarChar(34)
+  id          String       @id @default(uuid()) @db.VarChar(36)
+  customerId  String       @db.VarChar(36)
   customer    Customer     @relation(fields: [customerId], references: [id])
-  packageId   String       @db.VarChar(34)
+  packageId   String       @db.VarChar(36)
   package     Package      @relation(fields: [packageId], references: [id])
   discount    Float
   totalPrice  Int
@@ -191,10 +191,10 @@ model Sell {
 }
 
 model SellDetail {
-  id        String   @id @default(uuid()) @db.VarChar(34)
-  sellId    String   @db.VarChar(34)
+  id        String   @id @default(uuid()) @db.VarChar(36)
+  sellId    String   @db.VarChar(36)
   sell      Sell     @relation(fields: [sellId], references: [id])
-  partId    String   @db.VarChar(34)
+  partId    String   @db.VarChar(36)
   part      Part     @relation(fields: [partId], references: [id])
   amount    Int
   total     Int
@@ -203,7 +203,7 @@ model SellDetail {
 }
 
 model Part {
-  id          String       @id @default(uuid()) @db.VarChar(34)
+  id          String       @id @default(uuid()) @db.VarChar(36)
   list        String
   amount      Int
   price       Int

@@ -1,7 +1,7 @@
-import { ValidateData } from "../service/validate.js";
-import { resError, resSuccess } from "../service/response.js";
-import { EMessage, SMessage } from "../service/message.js";
-import prisma from "../config/prisma.js";
+import { ValidateData } from "../../service/validate.js";
+import { resError, resSuccess } from "../../service/response.js";
+import { EMessage, SMessage } from "../../service/message.js";
+import prisma from "../../config/prisma.js";
 
 export default class PurchaseController {
 

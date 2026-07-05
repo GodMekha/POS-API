@@ -7,6 +7,15 @@ import HistoryInInventoryController from "../../controller/user/HistoryInInvento
 import HistoryInProductController from "../../controller/user/HistoryInProduct.js";
 import InventoryController from "../../controller/user/Inventory.js";
 import OrderController from "../../controller/user/Order.js";
+import SellController from "../../controller/user/Sell.js";
+import PartController from "../../controller/user/Part.js";
+import ProductController from "../../controller/user/Product.js";
+import PackageController from "../../controller/user/Package.js";
+import PurchaseController from "../../controller/user/Purchase.js";
+import PurchaseDetailController from "../../controller/user/PurchaseDetail.js";
+import SellDetailController from "../../controller/user/SellDetail.js";
+import SupplyController from "../../controller/user/Supply.js";
+
 const router = express.Router();
 //----- auth -----
 router.get("/auth/getall", auth, AuthController.getAll);
@@ -19,7 +28,7 @@ router.delete("/auth/delete", auth, AuthController.DeleteUser);
 //----- category ---
 router.get("/category/getall", auth, CategoryController.getAll);
 router.get("/category/getone/:category_id", auth, CategoryController.getOne);
-router.post("/category/getone/:category_id", auth, CategoryController.Insert);
+router.post("/category/insert", auth, CategoryController.Insert);
 router.put("/category/update/category_id", auth, CategoryController.UpdateCategory);
 router.delete("/category/delete/:category_id", auth, CategoryController.DeleteCategory)
 //---- customer ---
@@ -67,4 +76,64 @@ router.post("/order/detail/insert", auth, OrderController.Insert);
 router.put("/order/detail/update/:order_id", auth, OrderController.Update);
 router.put("/order/detail/update/status/:order_id", auth, OrderController.UpdateStatus);
 router.delete("/order/detail/delete/:order_id", auth, OrderController.Delete)
+//---- package ---
+router.get("/package/getAll", auth, PackageController.getAll);
+router.get("/package/getOne/:id", auth, PackageController.getOne);
+router.post("/package/insert", auth, PackageController.Insert);
+router.put("/package/update/:id", auth, PackageController.Update);
+router.put("/package/update/status/:id", auth, PackageController.UpdateActive);
+router.delete("/package/delete/:id", auth, PackageController.Delete);
+//---- part ---
+router.get("/part/getAll", auth, PartController.getAll);
+router.get("/part/getOne/:id", auth, PartController.getOne);
+router.post("/part/insert", auth, PartController.Insert);
+router.put("/part/update/:id", auth, PartController.Update);
+router.delete("/part/delete/:id", auth, PartController.Delete);
+//---- Product ---
+router.get("/product/getAll", auth, ProductController.getAll);
+router.get("/product/getBy/:category_id", auth, ProductController.getBy);
+router.get("/product/getOne/:product_id", auth, ProductController.getOne);
+router.post("/product/insert", auth, ProductController.Insert);
+router.put("/product/update/:product_id", auth, ProductController.UpdateProduct);
+router.delete("/product/delete/:product_id", auth, ProductController.DeleteProduct);
+//---- Purchase ---
+router.get("/purchase/getAll", auth, PurchaseController.getAll);
+router.get("/purchase/getBy/:supply_id", auth, PurchaseController.getBySupply);
+router.get("/purchase/getOne/:purchase_id", auth, PurchaseController.getOne);
+router.post("/purchase/insert", auth, PurchaseController.Insert);
+router.put("/purchase/update/:purchase_id", auth, PurchaseController.Update);
+router.put("/purchase/update/status/:purchase_id", auth, PurchaseController.UpdateStatus);
+router.delete("/purchase/delete/:purchase_id", auth, PurchaseController.Delete);
+//---- Purchase Detail ---
+router.get("/purchase/detail/getAll", auth, PurchaseDetailController.getAll);
+router.get("/purchase/detail/getBy/:purchase_id", auth, PurchaseDetailController.getByPurchase);
+router.get("/purchase/detail/getOne/:pd_id", auth, PurchaseDetailController.getOne);
+router.post("/purchase/detail/insert", auth, PurchaseDetailController.Insert);
+router.put("/purchase/detail/update/:pd_id", auth, PurchaseDetailController.Update);
+router.put("/purchase/detail/update/status/:pd_id", auth, PurchaseDetailController.UpdateStatus);
+router.delete("/purchase/detail/delete/:pd_id", auth, PurchaseDetailController.Delete);
+//--- sell ---
+router.get("/sell/getAll", auth, SellController.getAll);
+router.get("/sell/getBy/customer/:id", auth , SellController.getByCustomer);
+router.get("/sell/getBy/package/:id", auth , SellController.getByPackage);
+router.get("/sell/getOne/:id", auth , SellController.getOne);
+router.post("/sell/insert", auth , SellController.Insert);
+router.put("/sell/update/:id", auth , SellController.Update);
+router.put("/sell/update/status/:id", auth , SellController.UpdateStatus);
+router.delete("/sell/delete", auth, SellController.Delete);
+//--- sell details ---
+router.get("/sell/detail/getAll", auth, SellDetailController.getAll);
+router.get("/sell/detail/getBy/sell/detail/:id", auth , SellDetailController.getBySell);
+router.get("/sell/detail/getBy/part/:id", auth , SellDetailController.getByPart);
+router.get("/sell/detail/getOne/:id", auth , SellDetailController.getOne);
+router.post("/sell/detail/insert", auth , SellDetailController.Insert);
+router.put("/sell/detail/update/:id", auth , SellDetailController.Update);
+router.delete("/sell/detail/delete", auth, SellDetailController.Delete);
+//--- supply ---
+router.get("/supply/getAll", auth, SupplyController.getAll);
+router.get("/supply/getOne/:supply_id", auth , SupplyController.getOne);
+router.post("/supply/insert", auth , SupplyController.Insert);
+router.put("/supply/update/:supply_id", auth , SupplyController.Update);
+router.put("/supply/update/active/:supply_id", auth , SupplyController.UpdateActive);
+router.delete("/supply/delete", auth, SupplyController.Delete);
 export default router;

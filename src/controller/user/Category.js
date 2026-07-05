@@ -65,10 +65,11 @@ export default class CategoryController {
                 return resError(res, 400, EMessage.BadRequest, "name");
             }
             const icon = req.files;
-            if (!icon.icon || !icon.icon.data) {
+            
+            if (!icon.files || !icon.files.data) {
                 return resError(res, 400, EMessage.BadRequest, "icon");
             }
-            const iconUrl = await UploadImageToCloud(icon.icon.data, icon.icon.mimetype);
+            const iconUrl = await UploadImageToCloud(icon.files.data, icon.files.mimetype);
             if (!iconUrl) return resError(res, 400, EMessage.BadRequest);
             const data = await prisma.category.create({
                 data: {

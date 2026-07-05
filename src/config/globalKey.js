@@ -2,9 +2,9 @@ import dotenv from "dotenv";
 dotenv.config()
 const SECREAT_KEY = process.env.SECREAT_KEY;
 const SECREAT_KEY_REFRESH = process.env.SECREAT_KEY_REFRESH;
-const CLOUDINARY_API_KEY = process.env.CLOUDINARY_API_KEY;
-const CLOUDINARY_API_SECRET = process.env.CLOUDINARY_API_SECRET;
-const CLOUDINARY_NAME = process.env.CLOUDINARY_NAME;
+const CLOUDINARY_API_KEY = process.env.CLOUDINRAY_API_KEY;
+const CLOUDINARY_API_SECRET = process.env.CLOUDINRAY_API_SECRET;
+const CLOUDINARY_NAME = process.env.CLOUDINRAY_CLOUD_NAME;
 export {
     SECREAT_KEY, SECREAT_KEY_REFRESH, 
     CLOUDINARY_API_KEY,
