@@ -29,15 +29,15 @@ router.delete("/auth/delete", auth, AuthController.DeleteUser);
 router.get("/category/getall", auth, CategoryController.getAll);
 router.get("/category/getone/:category_id", auth, CategoryController.getOne);
 router.post("/category/insert", auth, CategoryController.Insert);
-router.put("/category/update/category_id", auth, CategoryController.UpdateCategory);
+router.put("/category/update/:category_id", auth, CategoryController.UpdateCategory);
 router.delete("/category/delete/:category_id", auth, CategoryController.DeleteCategory)
 //---- customer ---
 router.get("/customer/getall", auth, CustomerController.getAll);
 router.get("/customer/getone/:customer_id", auth, CustomerController.getOne);
 router.post("/customer/insert", auth, CustomerController.Insert);
-router.put("/customer/update/:customer_id", auth, CustomerController.Update);
-router.put("/customer/update/active/:customer_id", auth, CustomerController.UpdateActive);
-router.delete("/customer/delete/:customer_id", auth, CustomerController.Delete)
+router.put("/customer/update/:id", auth, CustomerController.Update);
+router.put("/customer/update/active/:id", auth, CustomerController.UpdateActive);
+router.delete("/customer/delete/:id", auth, CustomerController.Delete)
 //---- history in inventory ---
 router.get("/history/inventory/getall", auth, HistoryInInventoryController.getAll);
 router.get("/history/inventory/getone/:history_id", auth, HistoryInInventoryController.getOne);

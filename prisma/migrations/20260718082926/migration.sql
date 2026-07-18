@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE `User` (
-    `id` VARCHAR(34) NOT NULL,
+    `user_id` VARCHAR(36) NOT NULL,
     `username` VARCHAR(191) NOT NULL,
     `password` VARCHAR(191) NOT NULL,
     `phoneNumber` INTEGER NOT NULL,
@@ -10,13 +10,13 @@ CREATE TABLE `User` (
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`user_id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
 CREATE TABLE `Order` (
-    `order_id` VARCHAR(34) NOT NULL,
-    `userId` VARCHAR(34) NOT NULL,
+    `order_id` VARCHAR(36) NOT NULL,
+    `userId` VARCHAR(36) NOT NULL,
     `totalPrice` INTEGER NOT NULL,
     `currency` VARCHAR(191) NOT NULL,
     `status` VARCHAR(191) NOT NULL,
@@ -28,8 +28,8 @@ CREATE TABLE `Order` (
 
 -- CreateTable
 CREATE TABLE `OrderDetail` (
-    `id` VARCHAR(34) NOT NULL,
-    `orderId` VARCHAR(34) NOT NULL,
+    `ordrd_id` VARCHAR(36) NOT NULL,
+    `orderId` VARCHAR(36) NOT NULL,
     `productId` VARCHAR(191) NOT NULL,
     `amount` INTEGER NOT NULL,
     `total` INTEGER NOT NULL,
@@ -37,12 +37,12 @@ CREATE TABLE `OrderDetail` (
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`ordrd_id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
 CREATE TABLE `Category` (
-    `category_id` VARCHAR(34) NOT NULL,
+    `category_id` VARCHAR(36) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
     `icon` VARCHAR(191) NULL,
     `active` BOOLEAN NOT NULL DEFAULT true,
@@ -54,8 +54,9 @@ CREATE TABLE `Category` (
 
 -- CreateTable
 CREATE TABLE `Product` (
-    `product_id` VARCHAR(34) NOT NULL,
-    `categoryId` VARCHAR(34) NOT NULL,
+    `product_id` VARCHAR(36) NOT NULL,
+    `categoryId` VARCHAR(36) NOT NULL,
+    `image` VARCHAR(191) NOT NULL,
     `productName` VARCHAR(191) NOT NULL,
     `productDetail` VARCHAR(191) NULL,
     `productQty` INTEGER NOT NULL,
@@ -71,8 +72,8 @@ CREATE TABLE `Product` (
 
 -- CreateTable
 CREATE TABLE `HistoryInProduct` (
-    `hip_id` VARCHAR(34) NOT NULL,
-    `productId` VARCHAR(34) NOT NULL,
+    `hip_id` VARCHAR(36) NOT NULL,
+    `productId` VARCHAR(36) NOT NULL,
     `productName` VARCHAR(191) NOT NULL,
     `productDetail` VARCHAR(191) NULL,
     `productQty` INTEGER NOT NULL,
@@ -85,7 +86,7 @@ CREATE TABLE `HistoryInProduct` (
 
 -- CreateTable
 CREATE TABLE `Inventory` (
-    `inventory_id` VARCHAR(34) NOT NULL,
+    `inventory_id` VARCHAR(36) NOT NULL,
     `list` VARCHAR(191) NOT NULL,
     `unit` VARCHAR(191) NOT NULL,
     `amount` INTEGER NOT NULL,
@@ -100,8 +101,8 @@ CREATE TABLE `Inventory` (
 
 -- CreateTable
 CREATE TABLE `HistoryInInventory` (
-    `id` VARCHAR(34) NOT NULL,
-    `inventoryId` VARCHAR(34) NOT NULL,
+    `id` VARCHAR(36) NOT NULL,
+    `inventoryId` VARCHAR(36) NOT NULL,
     `list` VARCHAR(191) NOT NULL,
     `unit` VARCHAR(191) NOT NULL,
     `amount` INTEGER NOT NULL,
@@ -116,7 +117,7 @@ CREATE TABLE `HistoryInInventory` (
 
 -- CreateTable
 CREATE TABLE `Supply` (
-    `supply_id` VARCHAR(34) NOT NULL,
+    `supply_id` VARCHAR(36) NOT NULL,
     `company` VARCHAR(191) NOT NULL,
     `phone` INTEGER NOT NULL,
     `sellName` VARCHAR(191) NOT NULL,
@@ -130,8 +131,8 @@ CREATE TABLE `Supply` (
 
 -- CreateTable
 CREATE TABLE `Purchase` (
-    `purchase_id` VARCHAR(34) NOT NULL,
-    `supplyId` VARCHAR(34) NOT NULL,
+    `purchase_id` VARCHAR(36) NOT NULL,
+    `supplyId` VARCHAR(36) NOT NULL,
     `currency` VARCHAR(191) NOT NULL,
     `expressName` VARCHAR(191) NULL,
     `expressPrice` INTEGER NOT NULL,
@@ -145,8 +146,8 @@ CREATE TABLE `Purchase` (
 
 -- CreateTable
 CREATE TABLE `PurchaseDetail` (
-    `pd_id` VARCHAR(34) NOT NULL,
-    `purchaseId` VARCHAR(34) NOT NULL,
+    `pd_id` VARCHAR(36) NOT NULL,
+    `purchaseId` VARCHAR(36) NOT NULL,
     `list` VARCHAR(191) NOT NULL,
     `unit` VARCHAR(191) NOT NULL,
     `amount` INTEGER NOT NULL,
@@ -161,7 +162,7 @@ CREATE TABLE `PurchaseDetail` (
 
 -- CreateTable
 CREATE TABLE `Package` (
-    `id` VARCHAR(34) NOT NULL,
+    `id` VARCHAR(36) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
     `timeline` VARCHAR(191) NOT NULL,
     `price` INTEGER NOT NULL,
@@ -174,7 +175,7 @@ CREATE TABLE `Package` (
 
 -- CreateTable
 CREATE TABLE `Customer` (
-    `id` VARCHAR(34) NOT NULL,
+    `id` VARCHAR(36) NOT NULL,
     `fullname` VARCHAR(191) NOT NULL,
     `phone` INTEGER NOT NULL,
     `address` VARCHAR(191) NOT NULL,
@@ -187,9 +188,9 @@ CREATE TABLE `Customer` (
 
 -- CreateTable
 CREATE TABLE `Sell` (
-    `id` VARCHAR(34) NOT NULL,
-    `customerId` VARCHAR(34) NOT NULL,
-    `packageId` VARCHAR(34) NOT NULL,
+    `id` VARCHAR(36) NOT NULL,
+    `customerId` VARCHAR(36) NOT NULL,
+    `packageId` VARCHAR(36) NOT NULL,
     `discount` DOUBLE NOT NULL,
     `totalPrice` INTEGER NOT NULL,
     `status` VARCHAR(191) NOT NULL,
@@ -201,9 +202,9 @@ CREATE TABLE `Sell` (
 
 -- CreateTable
 CREATE TABLE `SellDetail` (
-    `id` VARCHAR(34) NOT NULL,
-    `sellId` VARCHAR(34) NOT NULL,
-    `partId` VARCHAR(34) NOT NULL,
+    `id` VARCHAR(36) NOT NULL,
+    `sellId` VARCHAR(36) NOT NULL,
+    `partId` VARCHAR(36) NOT NULL,
     `amount` INTEGER NOT NULL,
     `total` INTEGER NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
@@ -214,7 +215,7 @@ CREATE TABLE `SellDetail` (
 
 -- CreateTable
 CREATE TABLE `Part` (
-    `id` VARCHAR(34) NOT NULL,
+    `id` VARCHAR(36) NOT NULL,
     `list` VARCHAR(191) NOT NULL,
     `amount` INTEGER NOT NULL,
     `price` INTEGER NOT NULL,
@@ -225,7 +226,7 @@ CREATE TABLE `Part` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
-ALTER TABLE `Order` ADD CONSTRAINT `Order_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `Order` ADD CONSTRAINT `Order_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `OrderDetail` ADD CONSTRAINT `OrderDetail_orderId_fkey` FOREIGN KEY (`orderId`) REFERENCES `Order`(`order_id`) ON DELETE RESTRICT ON UPDATE CASCADE;
