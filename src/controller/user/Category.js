@@ -104,7 +104,7 @@ export default class CategoryController {
             return resSuccess(res, SMessage.updated, update);
         } catch (error) {
             console.error("Update Category Controller Error:", error);
-            return SendError(res, 500, EMessage.ErrorServer, error.message)
+            return resError(res, 500, EMessage.ErrorServer, error.message)
         }
     }
     static async DeleteCategory(req, res) {
