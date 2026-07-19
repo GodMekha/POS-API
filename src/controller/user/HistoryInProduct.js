@@ -71,7 +71,7 @@ export default class HistoryInProductController {
             const { product_id } = req.params;
 
             // ກວດສອບວ່າ product ມີຢູ່ຈິງ
-            const product = await prisma.product.findFirst({
+            const product = await prisma.product.findMany({
                 where: { product_id },
             });
             if (!product) return resError(res, 404, EMessage.NotFound);

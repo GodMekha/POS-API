@@ -4,10 +4,10 @@ export const GenerateToken = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
             const payload = {
-                id: data
+                user_id: data
             }
             const payload_refresh = {
-                id: payload.id
+                user_id: payload.user_id
             }
             const token = jwt.sign(payload, SECREAT_KEY, { expiresIn: "1h" });
             const refreshToken = jwt.sign(payload_refresh, SECREAT_KEY_REFRESH, { expiresIn: "3h" });

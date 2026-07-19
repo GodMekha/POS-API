@@ -84,7 +84,7 @@ export default class AuthController {
             if (decrypPassowrd !== password) {
                 return resError(res, 400, EMessage.BadRequest);
             }
-            const tokens = await GenerateToken(user.id);
+            const tokens = await GenerateToken(user.user_id);
             const data = Object.assign(
                 JSON.parse(JSON.stringify(user)),
                 JSON.parse(JSON.stringify(tokens)),

@@ -65,6 +65,10 @@ export default class OrderController {
 
     static async getByUser(req, res) {
         try {
+            if (!req.user || !req.user.user_id) {
+                return resError(res, 401, EMessage.UnAuthorized || "Unauthorized access");
+            }
+
             const { user_id } = req.user;
 
             const checkUser = await prisma.user.findFirst({

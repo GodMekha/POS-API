@@ -26,7 +26,7 @@ export const Role = {
 }
 export const OrderStatus = {
   await: "await",
-  pedding: "pedding",
+  pending: "pending",
   success: "success",
   cancel: "cancel",
 } 

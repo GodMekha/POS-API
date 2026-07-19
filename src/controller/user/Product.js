@@ -52,7 +52,7 @@ export default class ProductController {
         try {
             const category_id = req.params.category_id;
 
-            const data = await prisma.product.findFirst({
+            const data = await prisma.product.findMany({
                 where: { categoryId: category_id },
                 include: { category: true },
             });
